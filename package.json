@@ -1,0 +1,32 @@
+{
+  "name": "sundaesocialapi",
+  "version": "1.0.0",
+  "description": "This project is a Social Network API built from scratch for a web application where users can share their thoughts, react to friends' thoughts, and create a friend list. The application uses MongoDB, a NoSQL database, to handle large amounts of unstructured data efficiently. The API is built with Node.js and Express.js, with Mongoose as the ODM (Object Data Modeling) library for MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npm run build && node dist/server.js",
+    "seed": "npm run build && node dist/utils/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UnknownKonflikt/SundaeSocialAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UnknownKonflikt/SundaeSocialAPI/issues"
+  },
+  "homepage": "https://github.com/UnknownKonflikt/SundaeSocialAPI#readme",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^22.10.2",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
