@@ -26,16 +26,14 @@ const thoughtSchema = new Schema<IThought>({
     required: true,
   },
   reactions: [reactionSchema],
-});
-
-// virtuals for reaction count, override toJSON to include virtuals
+},
 {
   toJSON: {
     virtuals: true,
     getters: true,
   },
   id: false,
-}
+});
 
 thoughtSchema
 .virtual('reactionCount')
@@ -48,4 +46,5 @@ thoughtSchema
 console.log('Registering Thought model');
 const Thought = model<IThought>('Thought', thoughtSchema);
 console.log('Thought model registered');
+
 export default Thought;

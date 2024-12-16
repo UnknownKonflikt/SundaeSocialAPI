@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const router = Router();
-import userRoutes from './API/userRoutes';
-import thoughtRoutes from './API/thoughtsRoutes';
+import userRoutes from './userRoutes';
+import thoughtRoutes from './thoughtsRoutes';
 
 router.use('/users', userRoutes);
 router.use('/thoughts', thoughtRoutes);

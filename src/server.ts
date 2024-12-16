@@ -1,6 +1,7 @@
 import express from 'express';
 import db from './config/connection';
-import router from './routes';
+import router from './routes/index';
+import e from 'express';
 
 const PORT = 3001;
 const app = express();
@@ -15,3 +16,4 @@ db.once('open', () => {
     });
     });
     
+

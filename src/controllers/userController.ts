@@ -1,4 +1,4 @@
-import { User } from '../models/directory';
+import { User } from '../models';
 import { Request, Response } from 'express';
 
 //All users
@@ -29,13 +29,15 @@ export const getSingleUser = async (req: Request, res: Response) => {
         } else {
             res.status(500).json({error: "Unknown server error"});
         }
+        }
     }
-
+    
+    
     //Create new user
     export const createUser = async (req: Request, res: Response) => {
         try {
-            const User = await User.create(req.body);
-            res.status(201).json(User);
+            const user = await User.create(req.body);
+            res.status(201).json(user);
         } catch (err) {
             res.status(500).json(err);
         }
@@ -44,13 +46,13 @@ export const getSingleUser = async (req: Request, res: Response) => {
     //Delete user
     export const deleteUser = async (req: Request, res: Response) => {
         try {
-            const User = await User.findByIdAndDelete(req.params.userId);
+            const user = await User.findByIdAndDelete(req.params.userId);
 
-            if (!User) {
+            if (!user) {
                 res.status(404).json({ message: 'No user found with this id!' });
                 return;
             }
-            res.status({ message: 'User deleted!' });
+            res.status(200).json({ message: 'User deleted!' });
         } catch (err) {
             res.status(500).json(err);
         }
@@ -58,17 +60,21 @@ export const getSingleUser = async (req: Request, res: Response) => {
 
     export const updateSingleUser = async (req: Request, res: Response) => {
         try {
-            const user = await User.findOneAndUpdate(
-                { name: req.params.name },
-                req.body,
-                { new: true, runValidators: true }
-        };
+        const user = await User.findOneAndUpdate(
+            { name: req.params.name },
+            req.body,
+            { new: true, runValidators: true }
+        );
 
-        res.status(200).json(user);
+        res.status(200).json(User);
         console.log('User updated!');
     } catch (err) {
         console.log('Something went wrong!');
-        res.status(500).json({messae: 'Server error', details: err.message});
+        if (err instanceof Error) {
+            res.status(500).json({message: 'Server error', details: err.message});
+        } else {
+            res.status(500).json({message: 'Unknown server error'});
+        }
     }
 }
 
@@ -101,3 +107,6 @@ export const deleteFriend = async (req: Request, res: Response) => {
         res.status(500).json(err);
     }
 }
+
+//Export controller functions
+export default { getUsers, getSingleUser, createUser, deleteUser, updateSingleUser, addFriend, deleteFriend };
