@@ -33,16 +33,13 @@ const UserSchema = new Schema<IUser>({
       ref: 'User',
     },
   ],
-});
-
-// virtuals for friend count, override toJSON to include virtuals
-{
+}, {
   toJSON: {
     virtuals: true,
     getters: true,
   },
   id: false,
-}
+});
 
 // get total count of friends on retrieval
 UserSchema.virtual('friendCount').get(function () {
